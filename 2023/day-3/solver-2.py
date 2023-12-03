@@ -36,9 +36,30 @@ if __name__ == '__main__':
     line_number = 0
     line_position = 0
 
+    # Start 
     while ( line_number >= 0 ):
+        # In scanning digit state
         ( line_number, line_position ) = scan_for_digit( manual, line_number, line_position )
-        print( line_number, line_position, manual[line_number][line_position])
+
+        # Record position of number
+
+        number_line = line_number
+        number_start = line_position
+        number_end = line_position # We don't know this yet.
+
+        # Digit found - now finding number state
+        # Only need to advance to non-digit or end of line
+
+        for number_end in range( line_position, len(manual[line_number])):
+            if manual[line_number][number_end].isdigit() :
+                continue
+            else:
+                break
+
+        print( number_line, number_start, number_end, manual[number_line][number_start:number_end])
+
+        line_position = number_end
+
         ( line_number, line_position ) = next_position( manual, line_number, line_position )
 
     
