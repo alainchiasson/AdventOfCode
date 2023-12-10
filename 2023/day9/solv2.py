@@ -1,0 +1,59 @@
+#!/usr/bin/env python3
+import sys
+
+def distance( time_accelerate, time_max ):
+
+    velocity = time_accelerate
+    time_moving = time_max - time_accelerate
+
+    return time_moving * velocity
+
+
+if __name__ == '__main__':
+
+    sum = 0 
+
+    for line in sys.stdin:
+        observarions = []
+        first_pass = []
+
+        for observation in line.split():
+            first_pass.append(int(observation))
+        observarions.append(first_pass)
+        print(observarions)
+        my_pass = 0
+
+    # Reduce to a line of zeros
+
+        non_zero = True
+        while non_zero :
+            non_zero = False
+            next_pass = []
+            for x in range(0, len(observarions[my_pass])-1):
+                next_pass.append( observarions[my_pass][x+1] - observarions[my_pass][x])
+            observarions.append(next_pass)
+            next_pass.append
+            print(observarions)
+            my_pass = my_pass + 1
+            for x in next_pass:
+                if x != 0:
+                    non_zero = True
+                    continue
+    #
+    # Calculate last values bsed on previous ones.
+        pre_value = []
+        for x in range(len(observarions), 0, -1):
+            obs_index = x-1
+            print(obs_index, pre_value, observarions[obs_index], len(observarions[obs_index]))
+            if ( x == len(observarions) ):
+                pre_value.append( 0 )
+            else:
+                pre_value.append( observarions[obs_index][0] - pre_value[-1])
+            print(obs_index, pre_value, observarions[obs_index], len(observarions[obs_index]))
+
+        sum = sum + pre_value[-1]
+    
+    print(sum)
+
+
+    
